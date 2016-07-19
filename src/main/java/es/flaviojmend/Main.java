@@ -8,6 +8,8 @@ import reactor.spring.context.config.EnableReactor;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import static java.lang.Thread.sleep;
+
 /**
  *
  * Created by flavio on 11/07/16.
@@ -28,6 +30,7 @@ public class Main {
         do{
             char key = reader.readChar();
             if(key == 'q'){ break;}
+            sleep(1000);
         }while(true);
         SpringApplication.exit(ctx);
     }

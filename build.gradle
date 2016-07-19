@@ -16,8 +16,12 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-    baseName = 'gs-messaging-reactor'
-    version = '0.3.0'
+    manifest {
+        attributes 'Main-Class': 'es.flaviojmend.Main'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 repositories {
@@ -35,6 +39,8 @@ dependencies {
     compile "io.projectreactor:reactor-net:2.0.8.RELEASE"
     compile "io.projectreactor.spring:reactor-spring-core:2.0.4.RELEASE"
     compile "io.projectreactor.spring:reactor-spring-context:2.0.4.RELEASE"
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
     compile 'io.netty:netty-all:4.0.27.Final'
 
     testCompile("junit:junit")
